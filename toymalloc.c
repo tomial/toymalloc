@@ -1,10 +1,9 @@
-#include <stdlib.h>
 #include <unistd.h>
 #include <pthread.h>
 #include <string.h>
+#include <stdio.h>
 
 typedef char ALIGN[16];
-
 typedef union header header_t;
 
 union header {
@@ -26,6 +25,7 @@ header_t* get_free_block(size_t size);
 void free(void* block);
 
 void* malloc(size_t size) {
+    printf("using toymalloc\n");
     size_t total_size;
     void* block;
     header_t* header;
@@ -73,6 +73,7 @@ header_t* get_free_block(size_t size) {
 }
 
 void free(void* block) {
+    printf("using toyfree\n");
     header_t *header, *tmp;
     void* programbreak;
 
